@@ -8,7 +8,7 @@ namespace ICCS_HW_CFG
 {
     public partial class Form2 : Form
     {
-        private string dataPath = @"C:\\Users\\F6CAF02\\Documents\\TEST_GUI_APP\\data.json";
+        private string dataPath = @"Z:\CAMERA\01 CAMERA PROJECTS\TEST_TEAM\gui_app_access\iccs_users.json";
 
         public Form2()
         {

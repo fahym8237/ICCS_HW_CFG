@@ -35,3 +35,4 @@ C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Debug\net6.0-windows\System.Security.
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Debug\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Debug\net6.0-windows\ICCS_HW_CFG.csproj.AssemblyReference.cache
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Debug\net6.0-windows\ICCS_HW_.B5A38B74.Up2Date
+C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Debug\net6.0-windows\ICCS_HW_CFG.sourcelink.json

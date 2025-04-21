@@ -21,6 +21,9 @@
         private System.Windows.Forms.ComboBox comboBoxPOS4;
         private System.Windows.Forms.Button btnSetPOS;
 
+        private System.Windows.Forms.TextBox textBoxFilePath;
+        private System.Windows.Forms.Button btnLoadFile;
+
         protected override void Dispose(bool disposing)
         {
             if (disposing && (components != null)) components.Dispose();
@@ -29,14 +32,13 @@
 
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
             this.groupBoxTraceability = new System.Windows.Forms.GroupBox();
             this.groupBoxPOS = new System.Windows.Forms.GroupBox();
 
             this.lblCurrentStatus = new System.Windows.Forms.Label();
             this.comboBoxSetStatus = new System.Windows.Forms.ComboBox();
-            this.btnCheckStatus = new System.Windows.Forms.Button();
             this.btnSetStatus = new System.Windows.Forms.Button();
+            this.btnCheckStatus = new System.Windows.Forms.Button();
 
             this.lblPOS1 = new System.Windows.Forms.Label();
             this.lblPOS2 = new System.Windows.Forms.Label();
@@ -48,13 +50,26 @@
             this.comboBoxPOS4 = new System.Windows.Forms.ComboBox();
             this.btnSetPOS = new System.Windows.Forms.Button();
 
+            this.textBoxFilePath = new System.Windows.Forms.TextBox();
+            this.btnLoadFile = new System.Windows.Forms.Button();
+
             this.SuspendLayout();
+
+            // textBoxFilePath
+            this.textBoxFilePath.Location = new System.Drawing.Point(20, 10);
+            this.textBoxFilePath.Size = new System.Drawing.Size(320, 23);
+
+            // btnLoadFile
+            this.btnLoadFile.Text = "Load File";
+            this.btnLoadFile.Location = new System.Drawing.Point(350, 10);
+            this.btnLoadFile.Size = new System.Drawing.Size(90, 23);
+            this.btnLoadFile.Click += new System.EventHandler(this.btnLoadFile_Click);
 
             // groupBoxTraceability
             this.groupBoxTraceability.Text = "Traceability Settings";
             this.groupBoxTraceability.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.groupBoxTraceability.Location = new System.Drawing.Point(20, 20);
-            this.groupBoxTraceability.Size = new System.Drawing.Size(400, 140);
+            this.groupBoxTraceability.Location = new System.Drawing.Point(20, 50);
+            this.groupBoxTraceability.Size = new System.Drawing.Size(420, 140);
             this.groupBoxTraceability.Controls.Add(this.lblCurrentStatus);
             this.groupBoxTraceability.Controls.Add(this.comboBoxSetStatus);
             this.groupBoxTraceability.Controls.Add(this.btnSetStatus);
@@ -86,8 +101,8 @@
             // groupBoxPOS
             this.groupBoxPOS.Text = "POS Configuration";
             this.groupBoxPOS.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Bold);
-            this.groupBoxPOS.Location = new System.Drawing.Point(20, 180);
-            this.groupBoxPOS.Size = new System.Drawing.Size(400, 220);
+            this.groupBoxPOS.Location = new System.Drawing.Point(20, 200);
+            this.groupBoxPOS.Size = new System.Drawing.Size(420, 220);
             this.groupBoxPOS.Controls.Add(this.lblPOS1);
             this.groupBoxPOS.Controls.Add(this.lblPOS2);
             this.groupBoxPOS.Controls.Add(this.lblPOS3);
@@ -98,49 +113,22 @@
             this.groupBoxPOS.Controls.Add(this.comboBoxPOS4);
             this.groupBoxPOS.Controls.Add(this.btnSetPOS);
 
-            // lblPOS1
-            this.lblPOS1.Location = new System.Drawing.Point(20, 30);
-            this.lblPOS1.Size = new System.Drawing.Size(150, 20);
-            this.lblPOS1.Text = "POS 1:";
+            // POS Labels and ComboBoxes
+            string[] labels = { "POS 1:", "POS 2:", "POS 3:", "POS 4:" };
+            Label[] lblPOS = { this.lblPOS1, this.lblPOS2, this.lblPOS3, this.lblPOS4 };
+            ComboBox[] comboBoxes = { this.comboBoxPOS1, this.comboBoxPOS2, this.comboBoxPOS3, this.comboBoxPOS4 };
 
-            // lblPOS2
-            this.lblPOS2.Location = new System.Drawing.Point(20, 65);
-            this.lblPOS2.Size = new System.Drawing.Size(150, 20);
-            this.lblPOS2.Text = "POS 2:";
+            for (int i = 0; i < 4; i++)
+            {
+                lblPOS[i].Location = new System.Drawing.Point(20, 30 + i * 35);
+                lblPOS[i].Size = new System.Drawing.Size(150, 20);
+                lblPOS[i].Text = labels[i];
 
-            // lblPOS3
-            this.lblPOS3.Location = new System.Drawing.Point(20, 100);
-            this.lblPOS3.Size = new System.Drawing.Size(150, 20);
-            this.lblPOS3.Text = "POS 3:";
-
-            // lblPOS4
-            this.lblPOS4.Location = new System.Drawing.Point(20, 135);
-            this.lblPOS4.Size = new System.Drawing.Size(150, 20);
-            this.lblPOS4.Text = "POS 4:";
-
-            // comboBoxPOS1
-            this.comboBoxPOS1.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBoxPOS1.Items.AddRange(new string[] { "Deactivate", "Activate" });
-            this.comboBoxPOS1.Location = new System.Drawing.Point(170, 30);
-            this.comboBoxPOS1.Size = new System.Drawing.Size(190, 25);
-
-            // comboBoxPOS2
-            this.comboBoxPOS2.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBoxPOS2.Items.AddRange(new string[] { "Deactivate", "Activate" });
-            this.comboBoxPOS2.Location = new System.Drawing.Point(170, 65);
-            this.comboBoxPOS2.Size = new System.Drawing.Size(190, 25);
-
-            // comboBoxPOS3
-            this.comboBoxPOS3.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBoxPOS3.Items.AddRange(new string[] { "Deactivat", "Activate" });
-            this.comboBoxPOS3.Location = new System.Drawing.Point(170, 100);
-            this.comboBoxPOS3.Size = new System.Drawing.Size(190, 25);
-
-            // comboBoxPOS4
-            this.comboBoxPOS4.DropDownStyle = ComboBoxStyle.DropDownList;
-            this.comboBoxPOS4.Items.AddRange(new string[] { "Deactivate", "Activate" });
-            this.comboBoxPOS4.Location = new System.Drawing.Point(170, 135);
-            this.comboBoxPOS4.Size = new System.Drawing.Size(190, 25);
+                comboBoxes[i].DropDownStyle = ComboBoxStyle.DropDownList;
+                comboBoxes[i].Items.AddRange(new string[] { "Deactivate", "Activate" });
+                comboBoxes[i].Location = new System.Drawing.Point(170, 30 + i * 35);
+                comboBoxes[i].Size = new System.Drawing.Size(190, 25);
+            }
 
             // btnSetPOS
             this.btnSetPOS.Text = "Update POS States";
@@ -149,7 +137,9 @@
             this.btnSetPOS.Click += new System.EventHandler(this.btnSetPOS_Click);
 
             // Form1
-            this.ClientSize = new System.Drawing.Size(450, 430);
+            this.ClientSize = new System.Drawing.Size(470, 450);
+            this.Controls.Add(this.textBoxFilePath);
+            this.Controls.Add(this.btnLoadFile);
             this.Controls.Add(this.groupBoxTraceability);
             this.Controls.Add(this.groupBoxPOS);
             this.Text = "ICCS Hardware Config";
@@ -157,6 +147,7 @@
             this.MaximizeBox = false;
 
             this.ResumeLayout(false);
+            this.PerformLayout();
         }
     }
 }
