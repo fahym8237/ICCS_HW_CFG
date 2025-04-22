@@ -19,7 +19,6 @@ C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ICCS_HW_CFG.ge
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ref\ICCS_HW_CFG.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\BouncyCastle.Cryptography.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\Enums.NET.dll
-C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\ExtendedNumerics.BigDecimal.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\MathNet.Numerics.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\Microsoft.IO.RecyclableMemoryStream.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\NPOI.Core.dll
@@ -29,10 +28,10 @@ C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\NPOI.OpenXmlFo
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\ICSharpCode.SharpZipLib.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\SixLabors.Fonts.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\SixLabors.ImageSharp.dll
-C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\System.Formats.Asn1.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\System.Security.Cryptography.Pkcs.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\System.Security.Cryptography.Xml.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\bin\Release\net6.0-windows\runtimes\win\lib\net6.0\System.Security.Cryptography.Pkcs.dll
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ICCS_HW_CFG.csproj.AssemblyReference.cache
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ICCS_HW_CFG.sourcelink.json
 C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ICCS_HW_.B5A38B74.Up2Date
+C:\Users\F6CAF02\Documents\ICCS_HW_CFG\obj\Release\net6.0-windows\ICCS_HW_CFG.Properties.Resources.resources

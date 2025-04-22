@@ -1,0 +1,24 @@
+[
+  {
+    "Username": "fahym",
+    "Password": "ficosa@2025",
+    "LoginType": [
+      "Engineering",
+      "Maintenance"
+    ]
+  },
+  {
+    "Username": "maint",
+    "Password": "FICOSA2024",
+    "LoginType": [
+      "Maintenance"
+    ]
+  },
+  {
+    "Username": "user",
+    "Password": "2222",
+    "LoginType": [
+      "Maintenance"
+    ]
+  }
+]

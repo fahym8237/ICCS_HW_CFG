@@ -1,8 +1,8 @@
 using System;
+using System.IO;
 using System.Windows.Forms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
-using System.IO;
 
 namespace ICCS_HW_CFG
 {
@@ -16,13 +16,13 @@ namespace ICCS_HW_CFG
         public Form1()
         {
             InitializeComponent();
-
-            // Apply dark theme on startup
             ApplyDarkTheme();
 
             if (File.Exists(settingsFilePath))
             {
-                FilePath = File.ReadAllText(settingsFilePath);
+                string[] lines = File.ReadAllLines(settingsFilePath);
+                if (lines.Length > 0)
+                    FilePath = lines[0];
             }
 
             textBoxFilePath.Text = FilePath;
@@ -123,6 +123,16 @@ namespace ICCS_HW_CFG
             {
                 workbook.Write(fs);
             }
+
+            // Compute CRC32 after saving
+            uint crc32 = CRC32Helper.ComputeCRC32(FilePath);
+
+            // Save path and CRC in lastpath.txt
+            File.WriteAllLines(settingsFilePath, new string[]
+            {
+                FilePath,
+                crc32.ToString("X8") // Save as 8-digit hex
+            });
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -134,9 +144,47 @@ namespace ICCS_HW_CFG
             }
 
             FilePath = textBoxFilePath.Text;
-            File.WriteAllText(settingsFilePath, FilePath);
             LoadExcelData();
+
+            // Re-save path to lastpath.txt (keep old CRC if exists)
+            string crc32 = File.Exists(settingsFilePath) && File.ReadAllLines(settingsFilePath).Length > 1
+                ? File.ReadAllLines(settingsFilePath)[1]
+                : "00000000";
+
+            File.WriteAllLines(settingsFilePath, new string[]
+            {
+                FilePath,
+                crc32
+            });
+
             MessageBox.Show("Excel file loaded successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+    }
+
+    public static class CRC32Helper
+    {
+        public static uint ComputeCRC32(string filePath)
+        {
+            using (var stream = File.OpenRead(filePath))
+            {
+                unchecked
+                {
+                    uint crc = 0xFFFFFFFF;
+                    int currentByte;
+                    while ((currentByte = stream.ReadByte()) != -1)
+                    {
+                        crc ^= (byte)currentByte;
+                        for (int k = 0; k < 8; k++)
+                        {
+                            if ((crc & 1) == 1)
+                                crc = (crc >> 1) ^ 0xEDB88320u;
+                            else
+                                crc >>= 1;
+                        }
+                    }
+                    return ~crc;
+                }
+            }
         }
     }
 }

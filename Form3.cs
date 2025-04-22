@@ -8,7 +8,7 @@ namespace ICCS_HW_CFG
 {
     public partial class Form3 : Form
     {
-        private string dataPath = @"Z:\CAMERA\01 CAMERA PROJECTS\TEST_TEAM\gui_app_access\iccs_users.json";
+        private string settingsFilePath = Path.Combine(Application.StartupPath, "iccs_users.json");
 
         public Form3()
         {
@@ -30,12 +30,12 @@ namespace ICCS_HW_CFG
                 return;
             }
 
-            List<User> users = File.Exists(dataPath)
-                ? JsonSerializer.Deserialize<List<User>>(File.ReadAllText(dataPath))
+            List<User> users = File.Exists(settingsFilePath)
+                ? JsonSerializer.Deserialize<List<User>>(File.ReadAllText(settingsFilePath))
                 : new List<User>();
 
             users.Add(new User { Username = username, Password = password, LoginType = roles });
-            File.WriteAllText(dataPath, JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true }));
+            File.WriteAllText(settingsFilePath, JsonSerializer.Serialize(users, new JsonSerializerOptions { WriteIndented = true }));
 
             MessageBox.Show("Account created!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
             this.Close();

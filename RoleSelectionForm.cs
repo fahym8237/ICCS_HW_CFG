@@ -11,7 +11,7 @@ namespace ICCS_HW_CFG
         {
             InitializeComponent();
             _user = user;
-            labelWelcome.Text = $"Welcome {user.Username}, please select a role to continue:";
+            labelWelcome.Text = $"{user.Username}! Choose your role:";
         }
 
         private void buttonEngineering_Click(object sender, EventArgs e)

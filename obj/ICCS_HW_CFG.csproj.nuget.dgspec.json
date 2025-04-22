@@ -52,7 +52,7 @@
           "dependencies": {
             "NPOI": {
               "target": "Package",
-              "version": "[2.7.3, )"
+              "version": "[2.6.1, )"
             }
           },
           "imports": [
