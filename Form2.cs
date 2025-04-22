@@ -8,7 +8,7 @@ namespace ICCS_HW_CFG
 {
     public partial class Form2 : Form
     {
-        private string dataPath = @"Z:\CAMERA\01 CAMERA PROJECTS\TEST_TEAM\gui_app_access\iccs_users.json";
+        private string settingsFilePath = Path.Combine(Application.StartupPath, "iccs_users.json");
 
         public Form2()
         {
@@ -20,13 +20,13 @@ namespace ICCS_HW_CFG
             string username = textBoxUsername.Text.Trim();
             string password = textBoxPassword.Text.Trim();
 
-            if (!File.Exists(dataPath))
+            if (!File.Exists(settingsFilePath))
             {
                 MessageBox.Show("Data file not found.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            var jsonData = File.ReadAllText(dataPath);
+            var jsonData = File.ReadAllText(settingsFilePath);
             var users = JsonSerializer.Deserialize<List<User>>(jsonData);
 
             var matchedUser = users.Find(u => u.Username == username && u.Password == password);
