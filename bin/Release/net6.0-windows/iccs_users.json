@@ -1,22 +1,15 @@
 [
   {
     "Username": "fahym",
-    "Password": "ficosa@2025",
+    "Password": "ficosa",
     "LoginType": [
       "Engineering",
       "Maintenance"
     ]
   },
   {
-    "Username": "maint",
-    "Password": "FICOSA2024",
-    "LoginType": [
-      "Maintenance"
-    ]
-  },
-  {
-    "Username": "user",
-    "Password": "2222",
+    "Username": "mnt",
+    "Password": "1111",
     "LoginType": [
       "Maintenance"
     ]

@@ -1,0 +1,102 @@
+[
+  {
+    "Username": "fahym",
+    "Timestamp": "2025-04-23 10:15:49",
+    "Action": "Changed POS Configs: POS1=Activate, POS2=Activate, POS3=, POS4="
+  },
+  {
+    "Username": "fahym",
+    "Timestamp": "2025-04-23 10:48:01",
+    "Action": "Changed POS Configs: POS1=Activate, POS2=, POS3=, POS4="
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 10:50:53",
+    "Action": "Changed POS Configs: POS1=, POS2=Activate, POS3=, POS4="
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:11:34",
+    "Action": "Changed POS1 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:11:34",
+    "Action": "Changed POS3 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:13:07",
+    "Action": "Changed POS1 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:14:34",
+    "Action": "Changed POS3 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:21:55",
+    "Action": "Changed POS1 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:23:46",
+    "Action": "Changed POS4 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:24:36",
+    "Action": "Changed POS1 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:25:48",
+    "Action": "Changed POS3 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:26:44",
+    "Action": "Changed POS1 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:28:23",
+    "Action": "Changed POS1 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:28:40",
+    "Action": "Changed POS3 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:28:40",
+    "Action": "Changed POS4 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:28:52",
+    "Action": "Changed POS2 from 0 to 1"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:29:38",
+    "Action": "Changed POS1 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:29:38",
+    "Action": "Changed POS2 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:29:38",
+    "Action": "Changed POS3 from 1 to 0"
+  },
+  {
+    "Username": "mnt",
+    "Timestamp": "2025-04-23 11:29:38",
+    "Action": "Changed POS4 from 1 to 0"
+  }
+]
