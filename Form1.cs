@@ -1,5 +1,7 @@
 using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text.Json;
 using System.Windows.Forms;
 using NPOI.HSSF.UserModel;
 using NPOI.SS.UserModel;
@@ -12,10 +14,12 @@ namespace ICCS_HW_CFG
         private string settingsFilePath = Path.Combine(Application.StartupPath, "lastpath.txt");
         private HSSFWorkbook workbook;
         private ISheet sheet;
+        private User CurrentUser;
 
-        public Form1()
+        public Form1(User user)
         {
             InitializeComponent();
+            CurrentUser = user;
             ApplyDarkTheme();
 
             if (File.Exists(settingsFilePath))
@@ -69,7 +73,6 @@ namespace ICCS_HW_CFG
                 textBox.BackColor = System.Drawing.Color.FromArgb(50, 50, 50);
                 textBox.ForeColor = System.Drawing.Color.White;
                 textBox.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-
             }
             else if (control is Label label)
             {
@@ -81,10 +84,11 @@ namespace ICCS_HW_CFG
         {
             try
             {
-                FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read);
-                workbook = new HSSFWorkbook(fs);
-                sheet = workbook.GetSheet("HWCfg");
-                fs.Close();
+                using (FileStream fs = new FileStream(FilePath, FileMode.Open, FileAccess.Read))
+                {
+                    workbook = new HSSFWorkbook(fs);
+                    sheet = workbook.GetSheet("HWCfg");
+                }
             }
             catch (Exception ex)
             {
@@ -102,20 +106,70 @@ namespace ICCS_HW_CFG
         private void btnSetStatus_Click(object sender, EventArgs e)
         {
             if (sheet == null) return;
+
             var traceabilityCell = sheet.GetRow(13).GetCell(1);
-            traceabilityCell.SetCellValue(comboBoxSetStatus.SelectedIndex == 0 ? 0 : 1);
-            SaveExcelFile();
+            int currentValue = (int)traceabilityCell.NumericCellValue;
+            int newValue = comboBoxSetStatus.SelectedIndex == 0 ? 0 : 1;
+
+            if (currentValue != newValue)
+            {
+                traceabilityCell.SetCellValue(newValue);
+                SaveExcelFile();
+                LogChange("Traceability", currentValue, newValue);
+            }
+            else
+            {
+                MessageBox.Show("No changes detected in traceability.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnSetPOS_Click(object sender, EventArgs e)
         {
             if (sheet == null) return;
-            sheet.GetRow(41).GetCell(1).SetCellValue(comboBoxPOS1.SelectedIndex == 0 ? 0 : 1);
-            sheet.GetRow(42).GetCell(1).SetCellValue(comboBoxPOS2.SelectedIndex == 0 ? 0 : 1);
-            sheet.GetRow(43).GetCell(1).SetCellValue(comboBoxPOS3.SelectedIndex == 0 ? 0 : 1);
-            sheet.GetRow(44).GetCell(1).SetCellValue(comboBoxPOS4.SelectedIndex == 0 ? 0 : 1);
-            SaveExcelFile();
+
+            bool hasChange = false;
+            hasChange |= UpdatePOSIfChanged(41, 1, comboBoxPOS1, 3, "POS1");
+            hasChange |= UpdatePOSIfChanged(42, 1, comboBoxPOS2, 4, "POS2");
+            hasChange |= UpdatePOSIfChanged(43, 1, comboBoxPOS3, 5, "POS3");
+            hasChange |= UpdatePOSIfChanged(44, 1, comboBoxPOS4, 6, "POS4");
+
+            if (hasChange)
+            {
+                SaveExcelFile();
+            }
+            else
+            {
+                MessageBox.Show("No changes detected.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
+
+        private bool UpdatePOSIfChanged(int rowIndex, int colIndex, ComboBox comboBox, int counterLineIndex, string posName)
+        {
+            var cell = sheet.GetRow(rowIndex).GetCell(colIndex);
+            int currentValue = (int)cell.NumericCellValue;
+
+            if (comboBox.SelectedIndex == -1)
+                return false;
+
+            int newValue = comboBox.SelectedIndex == 0 ? 0 : 1;
+
+            if (currentValue != newValue)
+            {
+                cell.SetCellValue(newValue);
+
+                //  Only reset counter if the new value is 1 (Activated/Used)
+                if (newValue == 1)
+                {
+                    ResetPOSCounter(counterLineIndex);
+                }
+
+                LogChange(posName, currentValue, newValue);
+                return true;
+            }
+
+            return false;
+        }
+
 
         private void SaveExcelFile()
         {
@@ -124,15 +178,48 @@ namespace ICCS_HW_CFG
                 workbook.Write(fs);
             }
 
-            // Compute CRC32 after saving
             uint crc32 = CRC32Helper.ComputeCRC32(FilePath);
 
-            // Save path and CRC in lastpath.txt
-            File.WriteAllLines(settingsFilePath, new string[]
+            string[] lines = File.Exists(settingsFilePath) ? File.ReadAllLines(settingsFilePath) : new string[7];
+            if (lines.Length < 7)
             {
-                FilePath,
-                crc32.ToString("X8") // Save as 8-digit hex
+                Array.Resize(ref lines, 7);
+            }
+
+            lines[0] = FilePath;
+            lines[1] = crc32.ToString("X8");
+
+            File.WriteAllLines(settingsFilePath, lines);
+        }
+
+        private void ResetPOSCounter(int lineIndex)
+        {
+            if (File.Exists(settingsFilePath))
+            {
+                string[] lines = File.ReadAllLines(settingsFilePath);
+                if (lines.Length > lineIndex)
+                {
+                    lines[lineIndex] = "0";
+                    File.WriteAllLines(settingsFilePath, lines);
+                }
+            }
+        }
+
+        private void LogChange(string fieldName, int oldValue, int newValue)
+        {
+            var historyFile = Path.Combine(Application.StartupPath, "history.json");
+            List<object> history = File.Exists(historyFile)
+                ? JsonSerializer.Deserialize<List<object>>(File.ReadAllText(historyFile)) ?? new List<object>()
+                : new List<object>();
+
+            history.Add(new
+            {
+                Username = CurrentUser?.Username ?? "Unknown",
+                Timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"),
+                Action = $"Changed {fieldName} from {oldValue} to {newValue}"
             });
+
+            File.WriteAllText(historyFile, JsonSerializer.Serialize(history, new JsonSerializerOptions { WriteIndented = true }));
         }
 
         private void btnLoadFile_Click(object sender, EventArgs e)
@@ -146,16 +233,19 @@ namespace ICCS_HW_CFG
             FilePath = textBoxFilePath.Text;
             LoadExcelData();
 
-            // Re-save path to lastpath.txt (keep old CRC if exists)
             string crc32 = File.Exists(settingsFilePath) && File.ReadAllLines(settingsFilePath).Length > 1
                 ? File.ReadAllLines(settingsFilePath)[1]
                 : "00000000";
 
-            File.WriteAllLines(settingsFilePath, new string[]
+            string[] lines = File.Exists(settingsFilePath) ? File.ReadAllLines(settingsFilePath) : new string[7];
+            if (lines.Length < 7)
             {
-                FilePath,
-                crc32
-            });
+                Array.Resize(ref lines, 7);
+            }
+
+            lines[0] = FilePath;
+            lines[1] = crc32;
+            File.WriteAllLines(settingsFilePath, lines);
 
             MessageBox.Show("Excel file loaded successfully.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }

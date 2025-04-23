@@ -22,7 +22,7 @@ namespace ICCS_HW_CFG
 
         private void buttonMaintenance_Click(object sender, EventArgs e)
         {
-            new Form1().Show(); // Dashboard
+            new Form1(_user).Show(); // UPDATED LINE
             this.Hide();
         }
     }

@@ -47,7 +47,8 @@ namespace ICCS_HW_CFG
             }
             else if (matchedUser.LoginType.Contains("Maintenance"))
             {
-                new Form1().Show();
+                new Form1(matchedUser).Show();
+
             }
         }
     }

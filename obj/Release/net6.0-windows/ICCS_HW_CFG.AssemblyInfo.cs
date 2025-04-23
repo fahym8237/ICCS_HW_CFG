@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ICCS_HW_CFG")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Release")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+77449ea8f306e5e66576fbe95372e8ae931c3008")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+cf267e4357c19758eed6131707ea604a6268b7a4")]
 [assembly: System.Reflection.AssemblyProductAttribute("ICCS_HW_CFG")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ICCS_HW_CFG")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
